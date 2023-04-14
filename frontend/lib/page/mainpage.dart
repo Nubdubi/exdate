@@ -29,26 +29,31 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
-      future: fetch(),
-      builder: (context, AsyncSnapshot snapshot) {
-        print(snapshot.data.toString());
-        if (!snapshot.hasData) return CircularProgressIndicator();
-        return SingleChildScrollView(
-          child: Column(children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                print(snapshot.data.toString());
-                return ListTile(
-                  title: Text(snapshot.data[0].toString()),
-                );
-              },
-            )
-          ]),
-        );
-      },
+        body: Column(
+      children: [
+        TextField(),
+        FutureBuilder(
+          future: fetch(),
+          builder: (context, AsyncSnapshot snapshot) {
+            print(snapshot.data.toString());
+            if (!snapshot.hasData) return CircularProgressIndicator();
+            return SingleChildScrollView(
+              child: Column(children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    print(snapshot.data.toString());
+                    return ListTile(
+                      title: Text(snapshot.data[0].toString()),
+                    );
+                  },
+                )
+              ]),
+            );
+          },
+        ),
+      ],
     ));
   }
 }
