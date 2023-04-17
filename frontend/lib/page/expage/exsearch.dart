@@ -20,17 +20,47 @@ class _ExSearchPageState extends State<ExSearchPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Text(result),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: TextField(),
-              ),
-              ElevatedButton(onPressed: () {}, child: Text('search'))
-            ],
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: TextField(),
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('search'))
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: 20,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {},
+                  leading: Text('image'),
+                  title: Text('농심 신라면'),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('유통기한 : 2022-02-03'),
+                      Text('바코드 : 102029122'),
+                      Text('등록일 : 2022-01-02')
+                    ],
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),
