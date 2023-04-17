@@ -10,6 +10,7 @@ class ProductAddPage extends StatefulWidget {
 
 class _ProductAddPageState extends State<ProductAddPage> {
   String result = '';
+  TextEditingController barcodeinput = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,22 +18,31 @@ class _ProductAddPageState extends State<ProductAddPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ElevatedButton(
-              onPressed: () async {
-                var res = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SimpleBarcodeScannerPage(),
-                    ));
-                setState(() {
-                  if (res is String) {
-                    result = res;
-                  }
-                });
-              },
-              child: const Text('Open Scanner'),
-            ),
-            Text('Barcode Result: $result'),
+            Container(
+                width: 500,
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        var res = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const SimpleBarcodeScannerPage(),
+                            ));
+                        setState(() {
+                          if (res is String) {
+                            barcodeinput.text = res;
+                          }
+                        });
+                      },
+                      child: const Text('Open Scanner'),
+                    ),
+                  ],
+                )),
+            TextFormField(
+              controller: barcodeinput,
+            )
           ],
         ),
       ),
