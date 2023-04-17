@@ -54,7 +54,7 @@ class _ExSearchPageState extends State<ExSearchPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('유통기한 : 2022-02-03'),
-                      Text('바코드 : 102029122'),
+                      Text('바코드 : $result'),
                       Text('등록일 : 2022-01-02')
                     ],
                   ),
