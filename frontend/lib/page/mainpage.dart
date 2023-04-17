@@ -3,6 +3,7 @@ import 'package:frontend/boxes/box.dart';
 import 'package:frontend/model/product.dart';
 import 'package:frontend/page/expage/exdata.dart';
 import 'package:frontend/page/expage/exsearch.dart';
+import 'package:frontend/page/products/productAddPage.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
@@ -62,7 +63,7 @@ class _MainPageState extends State<MainPage> {
             Navigator.push<void>(
               context,
               MaterialPageRoute<void>(
-                builder: (BuildContext context) => ExSearchPage(),
+                builder: (BuildContext context) => ProductAddPage(),
               ),
             );
           },
