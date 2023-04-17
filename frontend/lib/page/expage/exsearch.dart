@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/boxes/box.dart';
 import 'package:frontend/model/product.dart';
+import 'package:frontend/page/products/productAddPage.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
@@ -54,7 +55,7 @@ class _ExSearchPageState extends State<ExSearchPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('유통기한 : 2022-02-03'),
-                      Text('바코드 : $result'),
+                      Text('바코드 : 8080800'),
                       Text('등록일 : 2022-01-02')
                     ],
                   ),
@@ -69,7 +70,7 @@ class _ExSearchPageState extends State<ExSearchPage> {
           var res = await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const SimpleBarcodeScannerPage(),
+                builder: (context) => ProductAddPage(),
               ));
           setState(() {
             if (res is String) {
