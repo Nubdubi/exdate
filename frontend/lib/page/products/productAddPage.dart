@@ -72,6 +72,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
   }
 }
 
+// ignore: must_be_immutable
 class InputSection extends StatelessWidget {
   InputSection({super.key, required this.name, required this.controller});
   String name;

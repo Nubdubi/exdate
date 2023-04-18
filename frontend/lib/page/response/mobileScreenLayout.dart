@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/page/expage/exsearch.dart';
+
 import 'package:frontend/page/response/navigationitems.dart';
 
 class MobileScreenLayout extends StatefulWidget {

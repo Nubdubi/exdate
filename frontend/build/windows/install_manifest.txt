@@ -1,9 +1,0 @@
-F:/exdate/frontend/build/windows/runner/Debug/data/icudtl.dat
-F:/exdate/frontend/build/windows/runner/Debug/flutter_windows.dll
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/NOTICES.Z
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

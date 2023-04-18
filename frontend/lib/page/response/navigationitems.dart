@@ -8,5 +8,5 @@ List<Widget> homeScreenItems = [
   ProfilePage(),
   ExSearchPage(),
   ProfilePage(),
-  ExSearchPage(),
+  ProfilePage(),
 ];
