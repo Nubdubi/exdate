@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/model/product.dart';
 import 'package:frontend/page/mainpage.dart';
+import 'package:frontend/page/response/mobileScreenLayout.dart';
+import 'package:frontend/page/response/webScreenLayout.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import 'page/response/responsiveLayoutScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +29,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: ResponsiveLayout(
+        mobileScreenLayout: MobileScreenLayout(),
+        webScreenLayout: WebScreenLayout(),
+      ),
     );
   }
 }

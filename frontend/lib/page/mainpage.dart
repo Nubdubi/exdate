@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/boxes/box.dart';
 import 'package:frontend/model/product.dart';
+import 'package:frontend/page/expage/exdata.dart';
+import 'package:frontend/page/expage/exsearch.dart';
+import 'package:frontend/page/products/productAddPage.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,31 +32,42 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        TextField(),
-        FutureBuilder(
-          future: fetch(),
-          builder: (context, AsyncSnapshot snapshot) {
-            print(snapshot.data.toString());
-            if (!snapshot.hasData) return CircularProgressIndicator();
-            return SingleChildScrollView(
-              child: Column(children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    print(snapshot.data.toString());
-                    return ListTile(
-                      title: Text(snapshot.data[0].toString()),
-                    );
-                  },
-                )
-              ]),
+      body: FutureBuilder(
+        future: fetch(),
+        builder: (context, AsyncSnapshot snapshot) {
+          print(snapshot.data.toString());
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return SingleChildScrollView(
+            child: Column(children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  print(snapshot.data.toString());
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: Text('상품이미지'),
+                      title: Text('상품명'),
+                      subtitle: Text('유효일자 - 2030-03-02'),
+                    ),
+                  );
+                },
+              )
+            ]),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => ProductAddPage(),
+              ),
             );
           },
-        ),
-      ],
-    ));
+          child: Icon(Icons.search)),
+    );
   }
 }
