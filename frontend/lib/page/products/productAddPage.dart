@@ -76,7 +76,6 @@ class _ProductAddPageState extends State<ProductAddPage> {
                           if (res is String) {
                             getBarcode(res);
                             barcodeinput.text = res;
-                            titleinput.text = res;
                           }
                         });
                       },
