@@ -33,11 +33,11 @@ class _ExSearchPageState extends State<ExSearchPage> {
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: TextFormField(initialValue: result),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text('search'))
+                ElevatedButton(onPressed: () {}, child: const Text('search'))
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
@@ -48,9 +48,9 @@ class _ExSearchPageState extends State<ExSearchPage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   onTap: () {},
-                  leading: Text('image'),
-                  title: Text('농심 신라면'),
-                  subtitle: Column(
+                  leading: const Text('image'),
+                  title: const Text('농심 신라면'),
+                  subtitle: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -78,7 +78,7 @@ class _ExSearchPageState extends State<ExSearchPage> {
             }
           });
         },
-        child: Icon(Icons.camera),
+        child: const Icon(Icons.camera),
       ),
     );
   }
