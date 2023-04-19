@@ -1,0 +1,11 @@
+POST
+/bucket
+
+request
+  유저ID : user_id
+  버킷명 : name
+  날짜 : date
+
+response
+    
+  

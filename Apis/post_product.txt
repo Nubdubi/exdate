@@ -1,0 +1,12 @@
+POST
+/product
+
+request
+  버킷ID : bucket_id
+  상품명 : name
+  바코드 : bar_cd
+  날짜 : date
+
+response
+    
+  
