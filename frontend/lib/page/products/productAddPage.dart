@@ -26,7 +26,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
     String productName = '';
     getBarcode(barcode) async {
       http.Response response = await http.get(Uri.parse(
-          'http://openapi.foodsafetykorea.go.kr/api/e5999307e832428b9a4e/C005/json/1/10/BAR_CD=$barcode'));
+          'https://openapi.foodsafetykorea.go.kr/api/e5999307e832428b9a4e/C005/json/1/10/BAR_CD=$barcode'));
       // debugPrint(response.body);
       data = json.decode(response.body);
       print(data);

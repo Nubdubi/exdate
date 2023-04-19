@@ -75594,7 +75594,7 @@ A.aeh.prototype={
 $1(a){var s=0,r=A.Z(t.P),q=this,p,o,n,m
 var $async$$1=A.a_(function(b,c){if(b===1)return A.W(c,r)
 while(true)switch(s){case 0:s=2
-return A.a1(A.aGt(A.oX("http://openapi.foodsafetykorea.go.kr/api/e5999307e832428b9a4e/C005/json/1/10/BAR_CD="+a)),$async$$1)
+return A.a1(A.aGt(A.oX("https://openapi.foodsafetykorea.go.kr/api/e5999307e832428b9a4e/C005/json/1/10/BAR_CD="+a)),$async$$1)
 case 2:o=c
 n=B.bP.dH(0,A.aGd(A.aE3(o.e).c.a.h(0,"charset")).dH(0,o.w))
 m=q.a
