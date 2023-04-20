@@ -61,12 +61,12 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
               icon: Icon(Icons.search,
                   color: _page == 1 ? Colors.pinkAccent : Colors.grey)),
           BottomNavigationBarItem(
-              label: 'current',
-              icon: Icon(Icons.chrome_reader_mode_sharp,
+              label: 'add',
+              icon: Icon(Icons.add_box_rounded,
                   color: _page == 2 ? Colors.pinkAccent : Colors.grey)),
           BottomNavigationBarItem(
-              label: 'map',
-              icon: Icon(Icons.map_sharp,
+              label: 'calendar',
+              icon: Icon(Icons.calendar_month,
                   color: _page == 3 ? Colors.pinkAccent : Colors.grey)),
           BottomNavigationBarItem(
               label: 'profile',
