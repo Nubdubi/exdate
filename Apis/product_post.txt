@@ -1,5 +1,4 @@
-POST
-/product
+product 등록
 
 request
   버킷ID : bucket_id

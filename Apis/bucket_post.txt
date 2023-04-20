@@ -1,5 +1,4 @@
-POST
-/bucket
+bucket 등록
 
 request
   유저ID : user_id
