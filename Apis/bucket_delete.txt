@@ -1,8 +1,8 @@
 bucket 삭제
 
 request
-  버킷ID : bucket_id
-
-response
+  필수
+    버킷ID : bucket_id
+    날짜 : update_date
     
   

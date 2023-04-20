@@ -1,0 +1,6 @@
+product 삭제
+
+request
+    필수
+        상품ID : product_id
+        날짜 : update_date

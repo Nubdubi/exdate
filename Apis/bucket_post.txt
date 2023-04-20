@@ -1,10 +1,7 @@
 bucket 등록
 
 request
-  유저ID : user_id
-  버킷명 : name
-  날짜 : date
-
-response
-    
-  
+  필수
+    유저ID : user_id
+    버킷명 : name
+    날짜 : date

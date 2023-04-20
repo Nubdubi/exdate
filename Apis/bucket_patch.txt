@@ -1,12 +1,12 @@
 bucket 수정
 
 request
-  버킷ID : bucket_id
-  날짜 : update_date
+  필수
+    버킷ID : bucket_id
+    날짜 : update_date
+
+  선택
+    버킷명 : name
 
   이외에 바꾸고 싶은 bucket 컬럼명 중 하나 넣으면됨
   다만 수정 불가 컬럼이 있음 {bucket_id, user_id}
-
-response
-    
-  
