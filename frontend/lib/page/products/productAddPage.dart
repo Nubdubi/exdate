@@ -38,6 +38,28 @@ class _ProductAddPageState extends State<ProductAddPage> {
       }
     }
 
+    addBarcode(bucketid, userid, name) async {
+      data = {
+        'BUCKET_ID': bucketid,
+        'USER_ID': userid,
+        'name': name,
+        'delete_flag': 0,
+        'create_date': DateTime.now(),
+        'update_date': DateTime.now()
+      };
+      Map<String, String> requestHeaders = {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      };
+      http.Response response = await http.post(
+          Uri.parse('https://localhost:9000/product/$data'),
+          headers: requestHeaders);
+      if (response.statusCode == 200) {
+        print(response);
+      }
+    }
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -95,6 +117,14 @@ class _ProductAddPageState extends State<ProductAddPage> {
               name: '위치',
               controller: placeinput,
             ),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  addBarcode(12, 2, '테스트');
+                },
+                child: Text('등록'))
           ],
         ),
       ),

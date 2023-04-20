@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.18.0
   simple_barcode_scanner: ^0.0.8
   webview_windows: ^0.2.2
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   build_runner: ^2.3.3
