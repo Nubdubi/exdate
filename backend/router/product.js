@@ -5,7 +5,7 @@ const maria = require('../maria.js');
 router.post("/", (req, res) => {
     maria((conn) => {
       try {
-          conn.query('INSERT INTO product VALUES(DEFAULT, ?, ?, ?, ?, ?)',
+          conn.query('INSERT INTO product VALUES(default, ?, ?, ?, default, ?, ?)',
           [
             req.body.bucket_id,
             req.body.name,
