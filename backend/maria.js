@@ -1,10 +1,10 @@
 const maria = require('mysql');
 
 const pool = maria.createPool({
-    host:'localhost',
-    port:3306,
-    user:'root',
-    password:'root',
+    host:'castpro.site',
+    port:4885,
+    user:'tt',
+    password:'tt',
     database:'tt',
     connectionLimit: 20
 });
