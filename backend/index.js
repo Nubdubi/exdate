@@ -1,10 +1,15 @@
+const cors = require('cors');
 const express = require("express");
-const maria = require('./maria.js');
 const app = express();
+const maria = require('./maria.js');
 
 /**
  * express 설정
  */
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded( {extended : false } ));
 app.listen(9000, (err) => {
