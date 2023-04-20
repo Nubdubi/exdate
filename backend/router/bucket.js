@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
           });
       } catch (error) {
           console.log("db error");
-          res.send(err);
+          res.send(error);
       } finally{
           conn.release();
       }
