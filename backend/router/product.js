@@ -3,6 +3,37 @@ const router = express.Router();
 const maria = require('../maria.js');
 
 /**
+ * 상품조회
+ */
+router.get("/", (req, res) => {
+  if(req.body.bucket_id){
+    maria((conn) => {
+      try {
+          conn.query('SELECT product_id, name, bar_cd, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT 20',
+          [
+            req.body.bucket_id
+          ],
+          function(err, rows, fields){
+            if(err){
+              res.send("조회에러");
+            }else{
+              res.send(rows);
+            }
+          });
+      } catch (error) {
+          console.log("db error");
+          res.send(error);
+      } finally{
+          conn.release();
+      }
+    });
+  }else{
+    res.send("필수 request가 없음");
+  }
+});
+
+
+/**
  * 상품 등록
  */
 router.post("/", (req, res) => {

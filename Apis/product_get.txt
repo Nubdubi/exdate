@@ -1,0 +1,14 @@
+product 조회
+
+request
+  필수
+    bucket_id
+    
+
+response
+    product_id
+    name
+    bar_cd
+    create_date
+    update_date
+    

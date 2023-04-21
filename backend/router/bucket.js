@@ -3,6 +3,37 @@ const router = express.Router();
 const maria = require('../maria.js');
 
 /**
+ * 버킷 조회
+ */
+router.get("/", (req, res) => {
+  if(req.body.user_id){
+    maria((conn) => {
+      try {
+          conn.query('SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT 20',
+          [
+            req.body.user_id
+          ],
+          function(err, rows, fields){
+            if(err){
+              res.send("조회에러");
+            }else{
+              res.send(rows);
+            }
+          });
+      } catch (error) {
+          console.log("db error");
+          res.send(error);
+      } finally{
+          conn.release();
+      }
+    });  
+
+  }else{
+    res.send("필수 request가 없음");
+  }
+});
+
+/**
  * 버킷 등록
  */
 router.post("/", (req, res) => {

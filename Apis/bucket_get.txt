@@ -1,0 +1,13 @@
+bucket 조회
+
+request
+  필수
+    user_id
+    
+
+response
+    bucket_id
+    name
+    create_date : 생성날짜
+    update_date : 마지막 수정날짜
+  
