@@ -2,8 +2,13 @@ import 'dart:convert';
 import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:frontend/services/productService.dart';
+import 'package:intl/intl.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
+
+final _formkey = GlobalKey<FormState>();
 
 class ProductAddPage extends StatefulWidget {
   ProductAddPage({Key? key}) : super(key: key);
@@ -18,6 +23,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
   TextEditingController titleinput = TextEditingController();
   TextEditingController exdateinput = TextEditingController();
   TextEditingController placeinput = TextEditingController();
+  ProdcutController prodcutController = ProdcutController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,95 +44,155 @@ class _ProductAddPageState extends State<ProductAddPage> {
       }
     }
 
+    readdata(barcode) async {
+      http.Response response =
+          await http.get(Uri.parse('https://localhost:9000/'));
+      // debugPrint(response.body);
+      data = json.decode(response.body);
+      print(data);
+      print(data['C005']['RESULT']['CODE']);
+      if (data['C005']['RESULT']['CODE'] == 'INFO-000') {
+        print(data['C005']['row'][0]['PRDLST_NM']);
+        titleinput.text = data['C005']['row'][0]['PRDLST_NM'];
+        exdateinput.text = data['C005']['row'][0]['POG_DAYCNT'];
+      }
+    }
+
     addBarcode(bucketid, userid, name) async {
-      data = {
-        'BUCKET_ID': bucketid,
-        'USER_ID': userid,
-        'name': name,
-        'delete_flag': 0,
-        'create_date': DateTime.now(),
-        'update_date': DateTime.now()
-      };
+      data = {"user_id": 2, "name": "2222", "date": "2023-04-21 00:00:00"};
       Map<String, String> requestHeaders = {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json',
-        'Accept': '*/*'
+        'Accept': 'application/json'
       };
       http.Response response = await http.post(
-          Uri.parse('https://localhost:9000/product/$data'),
-          headers: requestHeaders);
+          Uri.parse('http://localhost:9000/bucket'),
+          headers: requestHeaders,
+          body: jsonEncode(data));
       if (response.statusCode == 200) {
         print(response);
       }
     }
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (productName.isNotEmpty) Text(productName),
-            SizedBox(
-                width: 800,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('바코드'),
-                    SizedBox(
-                      width: 300,
-                      child: TextField(
-                        controller: barcodeinput,
-                        onSubmitted: (value) {
-                          setState(() {
-                            getBarcode(barcodeinput.text);
-                          });
-                        },
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        var res = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const SimpleBarcodeScannerPage(),
-                            ));
-                        setState(() {
-                          if (res is String) {
-                            getBarcode(res);
-                            barcodeinput.text = res;
-                          }
-                        });
-                      },
-                      child: Icon(Icons.barcode_reader),
-                    ),
-                  ],
-                )),
-            InputSection(
-              name: '상품명',
-              controller: titleinput,
-            ),
-            InputSection(
-              name: '유통기한',
-              controller: exdateinput,
-            ),
-            InputSection(
-              name: '위치',
-              controller: placeinput,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  addBarcode(12, 2, '테스트');
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          key: _formkey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Barcode capture'),
+              InkWell(
+                onTap: () async {
+                  var res = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SimpleBarcodeScannerPage(),
+                      ));
+                  setState(() {
+                    if (res is String) {
+                      getBarcode(res);
+                      barcodeinput.text = res;
+
+                      getBarcode(barcodeinput.text);
+                    }
+                  });
                 },
-                child: Text('등록'))
-          ],
+                child: Icon(
+                  Icons.camera_alt_rounded,
+                  size: 40,
+                ),
+              ),
+              ProductInput(
+                text: 'Barcode',
+                validator: 'Enter Barcode',
+                controller: barcodeinput,
+                keytype: TextInputType.number,
+              ),
+              ProductInput(
+                text: 'Product Name',
+                validator: 'Enter Product Name',
+                controller: titleinput,
+                keytype: TextInputType.text,
+              ),
+              ProductInput(
+                text: 'Exdate',
+                validator: 'Enter Exdate',
+                controller: exdateinput,
+                keytype: TextInputType.datetime,
+              ),
+              if (productName.isNotEmpty) Text(productName),
+              // SizedBox(
+              //     width: 800,
+              //     child: Row(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Text('바코드'),
+              //         SizedBox(
+              //           width: 300,
+              //           child: TextField(
+              //             controller: barcodeinput,
+              //             onSubmitted: (value) {
+              //               setState(() {
+              //                 getBarcode(barcodeinput.text);
+              //               });
+              //             },
+              //           ),
+              //         ),
+              //       ],
+              //     )),
+              SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    prodcutController.addproduct(1, titleinput.text);
+                  },
+                  child: Text('상품등록')),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class ProductInput extends StatefulWidget {
+  ProductInput(
+      {super.key,
+      required this.text,
+      required this.validator,
+      required this.controller,
+      required this.keytype});
+  String text;
+  String validator;
+  TextEditingController controller;
+  TextInputType keytype;
+
+  @override
+  State<ProductInput> createState() => _ProductInputState();
+}
+
+class _ProductInputState extends State<ProductInput> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextFormField(
+        keyboardType: widget.keytype,
+        controller: widget.controller,
+        decoration: InputDecoration(
+            labelText: widget.text, border: OutlineInputBorder()),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return widget.validator;
+          }
+          return null;
+        },
       ),
     );
   }
@@ -142,11 +208,11 @@ class InputSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(name),
         SizedBox(
-          width: 10,
+          width: 30,
         ),
         SizedBox(
           width: 300,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class ProductService {
   BigInt? PRODUCT_ID;
@@ -52,5 +53,56 @@ const DOMAIN = 'localhost:9000';
 //   var url = "$PROTOCOL://$DOMAIN/$route?data=$dataStr";
 //   var result = await http.get(Uri.parse(url));
 
-  
 // }
+
+class ProdcutController {
+  var date = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+
+  addproduct(
+    bucketid,
+    name,
+  ) async {
+    var data = {
+      "bucket_id": bucketid,
+      "name": name,
+      "date": date,
+    };
+    Map<String, String> requestHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+    http.Response response = await http.post(
+        Uri.parse('http://localhost:9000/product'),
+        headers: requestHeaders,
+        body: jsonEncode(data));
+    if (response.statusCode == 200) {
+      print(response);
+    } else {
+      print(response.body);
+    }
+  }
+
+  addBucket(
+    userid,
+    name,
+  ) async {
+    var data = {
+      "user_id": userid,
+      "name": name,
+      "date": date,
+    };
+    Map<String, String> requestHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+    http.Response response = await http.post(
+        Uri.parse('http://localhost:9000/bucket'),
+        headers: requestHeaders,
+        body: jsonEncode(data));
+    if (response.statusCode == 200) {
+      print(response);
+    }
+  }
+}

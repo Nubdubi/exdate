@@ -55,7 +55,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
                     onPageChanged(0);
                     print(_page);
                   },
-                  title: Text('ProductPage'),
+                  title: Text('home'),
                   selectedColor: Colors.amber,
                   selectedTileColor: Colors.amber,
                   tileColor: _page == 0 ? Colors.pinkAccent : Colors.grey,
@@ -66,7 +66,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
                     onPageChanged(1);
                     print(_page);
                   },
-                  title: Text('TestPage'),
+                  title: Text('search'),
                   tileColor: _page == 1 ? Colors.pinkAccent : Colors.grey,
                 ),
                 ListTile(
@@ -74,7 +74,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
                     navigationTapped(2);
                     onPageChanged(2);
                   },
-                  title: Text('TestPage'),
+                  title: Text('add'),
                   tileColor: _page == 3 ? Colors.pinkAccent : Colors.grey,
                 ),
                 ListTile(
@@ -82,7 +82,15 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
                     navigationTapped(3);
                     onPageChanged(3);
                   },
-                  title: Text('ProfilePage'),
+                  title: Text('calendar'),
+                  tileColor: _page == 4 ? Colors.pinkAccent : Colors.grey,
+                ),
+                ListTile(
+                  onTap: () {
+                    navigationTapped(4);
+                    onPageChanged(4);
+                  },
+                  title: Text('profile'),
                   tileColor: _page == 4 ? Colors.pinkAccent : Colors.grey,
                 ),
               ],
