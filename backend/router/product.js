@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
   if(req.body.bucket_id && req.body.name && req.body.date){
     maria((conn) => {
       try {
-          conn.query('INSERT INTO product VALUES(default, ?, ?, ?, default, ?, ?)',
+          conn.query('INSERT INTO product (bucket_id, name, bar_cd, create_date, update_date) VALUES(?, ?, ?, ?, ?)',
           [
             req.body.bucket_id,
             req.body.name,
