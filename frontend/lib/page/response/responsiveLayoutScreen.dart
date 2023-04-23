@@ -18,11 +18,13 @@ class ResponsiveLayout extends StatefulWidget {
 class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > 1100) {
-        return widget.webScreenLayout;
-      }
-      return widget.mobileScreenLayout;
-    });
+    return SafeArea(
+      child: LayoutBuilder(builder: (context, constraints) {
+        if (constraints.maxWidth > 1100) {
+          return widget.webScreenLayout;
+        }
+        return widget.mobileScreenLayout;
+      }),
+    );
   }
 }
