@@ -31,43 +31,42 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
-        future: fetch(),
-        builder: (context, AsyncSnapshot snapshot) {
-          print(snapshot.data.toString());
-          if (!snapshot.hasData) return CircularProgressIndicator();
-          return SingleChildScrollView(
-            child: Column(children: [
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  print(snapshot.data.toString());
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
+    return SafeArea(
+      child: Scaffold(
+        body: FutureBuilder(
+          future: fetch(),
+          builder: (context, AsyncSnapshot snapshot) {
+            print(snapshot.data.toString());
+            if (!snapshot.hasData) return CircularProgressIndicator();
+            return SingleChildScrollView(
+              child: Column(children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    print(snapshot.data.toString());
+                    return ListTile(
                       leading: Text('상품이미지'),
                       title: Text('상품명'),
                       subtitle: Text('유효일자 - 2030-03-02'),
-                    ),
-                  );
-                },
-              )
-            ]),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push<void>(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext context) => ProductAddPage(),
-              ),
+                    );
+                  },
+                )
+              ]),
             );
           },
-          child: Icon(Icons.search)),
+        ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => ProductAddPage(),
+                ),
+              );
+            },
+            child: Icon(Icons.search)),
+      ),
     );
   }
 }

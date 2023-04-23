@@ -41,7 +41,7 @@ class _ExSearchPageState extends State<ExSearchPage> {
             height: 20,
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.7,
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: 20,
