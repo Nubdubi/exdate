@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/services/productService.dart';
-import 'package:intl/intl.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,7 +25,6 @@ class _ProductAddPageState extends State<ProductAddPage> {
   @override
   Widget build(BuildContext context) {
     Map data;
-    List productData = [];
     String productName = '';
     getBarcode(barcode) async {
       http.Response response = await http.get(Uri.parse(

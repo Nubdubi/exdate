@@ -37,16 +37,25 @@ router.get("/", (req, res) => {
  * 상품 등록
  */
 router.post("/", (req, res) => {
-  if(req.body.bucket_id && req.body.name && req.body.date){
+  if(
+    req.body.bucket_id 
+    && req.body.name 
+    && req.body.date 
+    && req.body.count
+    && req.body.expiration_date
+    && req.body.bar_cd != undefined
+  ){
     maria((conn) => {
       try {
-          conn.query('INSERT INTO product VALUES(default, ?, ?, ?, default, ?, ?)',
+          conn.query('INSERT INTO product (bucket_id, name, bar_cd, create_date, update_date, count, expiration_date) VALUES(?, ?, ?, ?, ?, ?, ?)',
           [
             req.body.bucket_id,
             req.body.name,
             req.body.bar_cd,
             req.body.date,
-            req.body.date
+            req.body.date,
+            req.body.count,
+            req.body.expiration_date
           ],
           function(err, rows, fields){
             if(err){
