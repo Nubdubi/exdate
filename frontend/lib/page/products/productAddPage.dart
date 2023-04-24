@@ -19,6 +19,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
   TextEditingController barcodeinput = TextEditingController();
   TextEditingController titleinput = TextEditingController();
   TextEditingController exdateinput = TextEditingController();
+  TextEditingController countinput = TextEditingController();
+
   TextEditingController placeinput = TextEditingController();
   ProdcutController prodcutController = ProdcutController();
 
@@ -102,11 +104,23 @@ class _ProductAddPageState extends State<ProductAddPage> {
                   size: 40,
                 ),
               ),
-              ProductInput(
-                text: 'Barcode',
-                validator: 'Enter Barcode',
-                controller: barcodeinput,
-                keytype: TextInputType.number,
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: barcodeinput,
+                  decoration: InputDecoration(
+                      labelText: 'Barcode', border: OutlineInputBorder()),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'widget.validator';
+                    }
+                    return null;
+                  },
+                  onFieldSubmitted: (value) {
+                    getBarcode(value);
+                  },
+                ),
               ),
               ProductInput(
                 text: 'Product Name',
@@ -120,6 +134,13 @@ class _ProductAddPageState extends State<ProductAddPage> {
                 controller: exdateinput,
                 keytype: TextInputType.datetime,
               ),
+              ProductInput(
+                text: 'count',
+                validator: 'Enter count',
+                controller: countinput,
+                keytype: TextInputType.number,
+              ),
+
               if (productName.isNotEmpty) Text(productName),
               // SizedBox(
               //     width: 800,
@@ -146,7 +167,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    prodcutController.addproduct(1, titleinput.text);
+                    prodcutController.addproduct(1, titleinput.text,
+                        countinput.text, exdateinput.text, barcodeinput.text);
                   },
                   child: Text('상품등록')),
             ],

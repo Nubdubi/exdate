@@ -10,6 +10,28 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    TextEditingController textEditingController = TextEditingController();
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: TextFormField(
+              controller: textEditingController,
+            ),
+          ),
+          Divider(),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('hey'),
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

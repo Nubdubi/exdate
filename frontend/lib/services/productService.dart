@@ -58,14 +58,14 @@ const DOMAIN = 'localhost:9000';
 class ProdcutController {
   var date = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
-  addproduct(
-    bucketid,
-    name,
-  ) async {
+  addproduct(bucketid, name, count, exdate, barcode) async {
     var data = {
       "bucket_id": bucketid,
       "name": name,
       "date": date,
+      "amount": count,
+      "expiration_date": exdate,
+      "bar_cd": barcode,
     };
     Map<String, String> requestHeaders = {
       "Access-Control-Allow-Origin": "*",
