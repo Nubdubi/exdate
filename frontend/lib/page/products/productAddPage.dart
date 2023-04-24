@@ -75,6 +75,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
     }
 
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
