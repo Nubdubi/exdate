@@ -14,22 +14,18 @@ router.get("/", (req, res) => {
             req.body.user_id
           ],
           function(err, rows, fields){
-            if(err){
-              res.send("조회에러");
-            }else{
-              res.send(rows);
-            }
+            if(err){ res.status(422).send(); }
+            else{ res.status(200).send(rows); }
           });
       } catch (error) {
-          console.log("db error");
-          res.send(error);
+        res.status(503).send(error);
       } finally{
-          conn.release();
+        conn.release();
       }
     });  
 
   }else{
-    res.send("필수 request가 없음");
+    res.status(400).send();
   }
 });
 
@@ -48,22 +44,18 @@ router.post("/", (req, res) => {
             req.body.date
           ],
           function(err, rows, fields){
-            if(err){
-              res.send("등록에러");
-            }else{
-              res.send('등록성공');
-            }
+            if(err){ res.status(422).send(); }
+            else{ res.status(200).send(); }
           });
       } catch (error) {
-          console.log("db error");
-          res.send(error);
+          res.status(503).send(error);
       } finally{
           conn.release();
       }
     });  
 
   }else{
-    res.send("필수 request가 없음");
+    res.status(400).send();
   }
 });
     
@@ -81,21 +73,17 @@ router.post("/", (req, res) => {
               req.body.bucket_id
             ],
             function(err, rows, fields){
-              if(err){
-                res.send("삭제에러");
-              }else{
-                res.send('삭제성공');
-              }
+              if(err){ res.status(422).send(); }
+              else{ res.status(200).send(); }
             });
         } catch (error) {
-            console.log("db error");
-            res.send(error);
+          res.status(503).send(error);
         } finally{
             conn.release();
         }
       });
     }else{
-      res.send("필수 request가 없음");
+      res.status(400).send();
     }
   });
 
@@ -120,21 +108,17 @@ router.post("/", (req, res) => {
               req.body.bucket_id
             ],
             function(err, rows, fields){
-              if(err){
-                res.send("수정에러");
-              }else{
-                res.send('수정성공');
-              }
+              if(err){ res.status(422).send(); }
+              else{ res.status(200).send(); }
             });
         } catch (error) {
-            console.log("db error");
-            res.send(error);
+          res.status(503).send(error);
         } finally{
             conn.release();
         }
       });
     }else{
-      res.send("필수 request가 없음");
+      res.status(400).send();
     }
     
   });

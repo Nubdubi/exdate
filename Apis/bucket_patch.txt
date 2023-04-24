@@ -10,3 +10,11 @@ request
 
   이외에 바꾸고 싶은 bucket 컬럼명 중 하나 넣으면됨
   다만 수정 불가 컬럼이 있음 {bucket_id, user_id}
+
+
+response
+  status
+    200 : 성공
+    400 : 클라이언트 api정보 오류 (필요 request정보 없음)
+    422 : 쿼리문 실패 (request 문제 이거나 , query문 잘못됨)
+    503 : 과부하 상태 서버 오류 (DB 연결 실패)

@@ -6,9 +6,15 @@ request
     
 
 response
+  return data
     product_id
     name
     bar_cd
     create_date
     update_date
     
+  status
+    200 : 성공
+    400 : 클라이언트 api정보 오류 (필요 request정보 없음)
+    422 : 쿼리문 실패 (request 문제 이거나 , query문 잘못됨)
+    503 : 과부하 상태 서버 오류 (DB 연결 실패)
