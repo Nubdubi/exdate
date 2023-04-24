@@ -10,6 +10,8 @@ response
     product_id
     name
     bar_cd
+    amount : 상품 수량
+    expiration_date : 유통기한
     create_date
     update_date
     

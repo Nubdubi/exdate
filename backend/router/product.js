@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   if(req.body.bucket_id){
     maria((conn) => {
       try {
-          conn.query('SELECT product_id, name, bar_cd, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT 20',
+          conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT 20',
           [
             req.body.bucket_id
           ],
@@ -43,14 +43,14 @@ router.post("/", (req, res) => {
   ){
     maria((conn) => {
       try {
-          conn.query('INSERT INTO product (bucket_id, name, bar_cd, create_date, update_date, count, expiration_date) VALUES(?, ?, ?, ?, ?, ?, ?)',
+          conn.query('INSERT INTO product (bucket_id, name, bar_cd, create_date, update_date, amount, expiration_date) VALUES(?, ?, ?, ?, ?, ?, ?)',
           [
             req.body.bucket_id,
             req.body.name,
             req.body.bar_cd,
             req.body.date,
             req.body.date,
-            req.body.count,
+            req.body.amount,
             req.body.expiration_date
           ],
           function(err, rows, fields){

@@ -5,7 +5,7 @@ request
     버킷ID : bucket_id
     상품명 : name
     날짜 : date
-    상품갯수 : count
+    상품갯수 : amount
     유통기한 : expiration_date
     바코드 : bar_cd (없으면 빈값 넣으면 됨)
   
