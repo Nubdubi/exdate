@@ -37,7 +37,7 @@ router.post("/", (req, res) => {
     req.body.bucket_id 
     && req.body.name 
     && req.body.date 
-    && req.body.count
+    && req.body.amount
     && req.body.expiration_date
     && req.body.bar_cd != undefined
   ){
