@@ -1,5 +1,7 @@
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get/get.dart';
 
 class GoogleSignInApi {
   static const _clientIDWeb =
@@ -13,7 +15,6 @@ class GoogleSignInApi {
 
   static Future logout() => _googleSignIn.disconnect();
 }
-
 
 // class AuthService {
 //   Future<void> signIn() async {
@@ -38,3 +39,12 @@ class GoogleSignInApi {
 //     // . . .
 //   }
 // }
+
+class LoginController extends GetxController {
+  var _googleSignin = GoogleSignIn();
+  var googleAccount = Rx<GoogleSignInAccount?>(null);
+
+  login() async {
+    googleAccount.value = await _googleSignin.signIn();
+  }
+}

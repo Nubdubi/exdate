@@ -1,13 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/page/auth/loginpage.dart';
 import 'package:frontend/page/response/mobileScreenLayout.dart';
 import 'package:frontend/page/response/responsiveLayoutScreen.dart';
 import 'package:frontend/page/response/webScreenLayout.dart';
-import 'package:frontend/services/authService.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart ' as http;
 
@@ -165,14 +162,14 @@ class _MyAppState extends State<MyApp> {
             // 참조: src/sign_in_button.dart
             ElevatedButton(
               onPressed: _handleSignIn,
-              child: Text('login'),
+              child: const Text('login'),
             ),
           ],
         ),
       );
       // The user is Authenticated
     } else {
-      return ResponsiveLayout(
+      return const ResponsiveLayout(
           mobileScreenLayout: MobileScreenLayout(),
           webScreenLayout: WebScreenLayout());
     }
@@ -185,6 +182,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: _buildBody());
+        home: ConstrainedBox(
+            constraints: const BoxConstraints.expand(), child: _buildBody()));
   }
 }

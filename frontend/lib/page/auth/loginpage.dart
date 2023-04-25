@@ -28,24 +28,24 @@ class _LoginPageState extends State<LoginPage> {
         '317921682520-osl28bu3k92j0st1hjm9ehvc8m9n29jl.apps.googleusercontent.com',
     scopes: scopes,
   );
-  Future signin() async {
-    await GoogleSignInApi.login();
-  }
+  // Future signin() async {
+  //   await GoogleSignInApi.login();
+  // }
 
-  Future signinWeb() async {
-    final user = await GoogleSignInApi.weblogin();
-    if (user == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('SignFailed')));
-    } else {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => ResponsiveLayout(
-          mobileScreenLayout: MobileScreenLayout(),
-          webScreenLayout: WebScreenLayout(),
-        ),
-      ));
-    }
-  }
+  // Future signinWeb() async {
+  //   final user = await GoogleSignInApi.weblogin();
+  //   if (user == null) {
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackBar(content: Text('SignFailed')));
+  //   } else {
+  //     Navigator.of(context).pushReplacement(MaterialPageRoute(
+  //       builder: (context) => ResponsiveLayout(
+  //         mobileScreenLayout: MobileScreenLayout(),
+  //         webScreenLayout: WebScreenLayout(),
+  //       ),
+  //     ));
+  //   }
+  // }
 
   GoogleSignInAccount? _currentUser;
   bool _isAuthorized = false; // has granted permissions?
