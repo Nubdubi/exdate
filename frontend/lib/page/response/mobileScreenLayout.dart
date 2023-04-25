@@ -70,7 +70,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                   color: _page == 3 ? Colors.pinkAccent : Colors.grey)),
           BottomNavigationBarItem(
               label: 'profile',
-              icon: Icon(CupertinoIcons.profile_circled,
+              icon: Icon(Icons.settings,
                   color: _page == 4 ? Colors.pinkAccent : Colors.grey)),
         ],
         onTap: navigationTapped,

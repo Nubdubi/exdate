@@ -43,8 +43,40 @@
     </script>
     <!-- This script adds the flutter initialization JS code -->
     <script src="flutter.js" defer></script>
+    <style>
+      body {
+        background-color: #ffffff;
+      }
+
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+
+      .loader {
+        width: 600px;
+        height: 120px;
+      }
+    </style>
   </head>
   <body>
+    <div class="loading">
+      <div class="loader">
+        <img
+          class="blink"
+          width="220px"
+          height="120px"
+          src="https://csemsyfvlkikwoggzrze.supabase.co/storage/v1/object/public/public/barcode.jpg"
+        />
+      </div>
+    </div>
     <script>
       window.addEventListener("load", function (ev) {
         // Download main.dart.js

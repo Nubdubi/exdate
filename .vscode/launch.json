@@ -15,7 +15,8 @@
       "name": "Flutter",
       "request": "launch",
       "type": "dart",
-      "program": "${workspaceFolder}/frontend/lib/main.dart"
+      "program": "${workspaceFolder}/frontend/lib/main.dart",
+      "args": ["--web-port", "9001"]
     }
   ]
 }
