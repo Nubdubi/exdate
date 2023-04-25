@@ -41,11 +41,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: InkWell(
                   onTap: () {
                     setState(() {
-                                            
                       _handleSignOut();
-                      Navigator.of(context).
                     });
-                 
                   },
                   child: Text('h'),
                 ),

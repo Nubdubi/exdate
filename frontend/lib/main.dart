@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/page/auth/loginpage.dart';
 import 'package:frontend/page/response/mobileScreenLayout.dart';
 import 'package:frontend/page/response/responsiveLayoutScreen.dart';
 import 'package:frontend/page/response/webScreenLayout.dart';
@@ -9,6 +10,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart ' as http;
 
 final GoogleSignInAccount? user = _currentUser;
+const List<String> scopes = <String>[
+  'email',
+  'https://www.googleapis.com/auth/contacts.readonly',
+];
+
+final GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  clientId:
+      '317921682520-osl28bu3k92j0st1hjm9ehvc8m9n29jl.apps.googleusercontent.com',
+  scopes: scopes,
+);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -27,17 +39,6 @@ String _contactText = '';
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  static const List<String> scopes = <String>[
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ];
-
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    // Optional clientId
-    clientId:
-        '317921682520-osl28bu3k92j0st1hjm9ehvc8m9n29jl.apps.googleusercontent.com',
-    scopes: scopes,
-  );
 
   String? _pickFirstNamedContact(Map<String, dynamic> data) {
     final List<dynamic>? connections = data['connections'] as List<dynamic>?;
@@ -182,7 +183,6 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ConstrainedBox(
-            constraints: const BoxConstraints.expand(), child: _buildBody()));
+        home: LoginPage());
   }
 }

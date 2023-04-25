@@ -8,7 +8,6 @@ import 'package:frontend/page/search/searchPage.dart';
 List<Widget> homeScreenItems = [
   // BlockTest(),
   ExSearchPage(),
-  SearchPage(),
   ProductAddPage(),
   CalendarPage(),
   ProfilePage(),

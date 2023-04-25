@@ -53,25 +53,25 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         items: [
           BottomNavigationBarItem(
             label: 'home',
-            icon: Icon(Icons.home,
+            icon: Icon(Icons.menu,
                 color: _page == 0 ? Colors.pinkAccent : Colors.grey),
           ),
-          BottomNavigationBarItem(
-              label: 'search',
-              icon: Icon(Icons.search,
-                  color: _page == 1 ? Colors.pinkAccent : Colors.grey)),
+          // BottomNavigationBarItem(
+          //     label: 'search',
+          //     icon: Icon(Icons.search,
+          //         color: _page == 1 ? Colors.pinkAccent : Colors.grey)),
           BottomNavigationBarItem(
               label: 'add',
-              icon: Icon(Icons.add_box_rounded,
+              icon: Icon(Icons.add_box_outlined,
+                  color: _page == 1 ? Colors.pinkAccent : Colors.grey)),
+          BottomNavigationBarItem(
+              label: 'bucket',
+              icon: Icon(CupertinoIcons.arrow_up_bin,
                   color: _page == 2 ? Colors.pinkAccent : Colors.grey)),
           BottomNavigationBarItem(
-              label: 'calendar',
-              icon: Icon(Icons.calendar_month,
-                  color: _page == 3 ? Colors.pinkAccent : Colors.grey)),
-          BottomNavigationBarItem(
               label: 'profile',
-              icon: Icon(Icons.settings,
-                  color: _page == 4 ? Colors.pinkAccent : Colors.grey)),
+              icon: Icon(Icons.manage_accounts,
+                  color: _page == 3 ? Colors.pinkAccent : Colors.grey)),
         ],
         onTap: navigationTapped,
       ),

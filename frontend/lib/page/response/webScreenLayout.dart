@@ -75,23 +75,23 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
                     onPageChanged(2);
                   },
                   title: Text('add'),
-                  tileColor: _page == 3 ? Colors.pinkAccent : Colors.grey,
+                  tileColor: _page == 2 ? Colors.pinkAccent : Colors.grey,
                 ),
+                // ListTile(
+                //   onTap: () {
+                //     navigationTapped(3);
+                //     onPageChanged(3);
+                //   },
+                //   title: Text('calendar'),
+                //   tileColor: _page == 4 ? Colors.pinkAccent : Colors.grey,
+                // ),
                 ListTile(
                   onTap: () {
                     navigationTapped(3);
                     onPageChanged(3);
                   },
-                  title: Text('calendar'),
-                  tileColor: _page == 4 ? Colors.pinkAccent : Colors.grey,
-                ),
-                ListTile(
-                  onTap: () {
-                    navigationTapped(4);
-                    onPageChanged(4);
-                  },
                   title: Text('profile'),
-                  tileColor: _page == 4 ? Colors.pinkAccent : Colors.grey,
+                  tileColor: _page == 3 ? Colors.pinkAccent : Colors.grey,
                 ),
               ],
             ),

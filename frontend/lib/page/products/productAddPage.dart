@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/services/productService.dart';
+import 'package:get/get.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
 
@@ -169,6 +170,16 @@ class _ProductAddPageState extends State<ProductAddPage> {
                   onPressed: () {
                     prodcutController.addproduct(1, titleinput.text,
                         countinput.text, exdateinput.text, barcodeinput.text);
+                    barcodeinput.clear();
+                    titleinput.clear();
+                    exdateinput.clear();
+                    titleinput.clear();
+                    countinput.clear();
+                    Get.snackbar(
+                      'productadd success',
+                      '등록완료',
+                      backgroundColor: Colors.white,
+                    );
                   },
                   child: Text('상품등록')),
             ],
