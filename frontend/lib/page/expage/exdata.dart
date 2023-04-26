@@ -198,99 +198,100 @@ class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
                     ),
                   ]),
               Container(
-                  height: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.width * 0.9,
                   child: TabBarView(children: [
                     ListView.builder(
                       key: const PageStorageKey("LIST_VIEW"),
                       itemCount: 20,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          onTap: () {},
-                          leading: const Text(
-                            'image',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          title: const Text(
-                            '농심 신라면',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '바코드 : 8080800',
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.color),
-                                  ),
-                                  const Row(
-                                    children: [
-                                      Text(
-                                        '2022-01-02 ~',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      Text(
-                                        '2022-02-03',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const Column(
-                                children: [
-                                  Text(
-                                    'n EA',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  Text(
-                                    'MM.dd',
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                          trailing: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            onTap: () {},
+                            leading: const Text(
+                              'image',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            title: const Text(
+                              '농심 신라면',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Checkbox(
-                                  value: _isChecked,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _isChecked = value!;
-                                    });
-                                  },
-                                ),
-                                const SizedBox(
-                                  height: 1,
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 24,
-                                    height: 14,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: const Color.fromRGBO(
-                                          242, 184, 181, 1),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '바코드 : 8080800',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium
+                                              ?.color),
                                     ),
-                                    child: const Center(
-                                        child: Text('상태',
-                                            style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    96, 20, 16, 1),
-                                                fontSize: 10))),
-                                  ),
+                                    const Row(
+                                      children: [
+                                        Text(
+                                          '2022-01-02 ~',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        Text(
+                                          '2022-02-03',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const Column(
+                                  children: [
+                                    Text(
+                                      'n EA',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      'MM.dd',
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  ],
                                 )
-                              ]),
+                              ],
+                            ),
+                            trailing: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Checkbox(
+                                    value: _isChecked,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _isChecked = value!;
+                                      });
+                                    },
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: 24,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: const Color.fromRGBO(
+                                            242, 184, 181, 1),
+                                      ),
+                                      child: const Center(
+                                          child: Text('상태',
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      96, 20, 16, 1),
+                                                  fontSize: 10))),
+                                    ),
+                                  )
+                                ]),
+                          ),
                         );
                       },
                     ),
