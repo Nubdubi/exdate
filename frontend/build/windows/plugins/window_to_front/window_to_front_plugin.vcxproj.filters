@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="F:\exdate\frontend\windows\flutter\ephemeral\.plugin_symlinks\window_to_front\windows\window_to_front_plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="F:\exdate\frontend\windows\flutter\ephemeral\.plugin_symlinks\window_to_front\windows\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4360978E-07DA-348C-9D3A-BB44FB019CCD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

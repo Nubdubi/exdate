@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/page/auth/loginpage.dart';
 import 'package:frontend/page/mainpage.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -40,9 +41,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 radius: 40,
                 child: InkWell(
                   onTap: () {
-                    setState(() {
-                      _handleSignOut();
-                    });
+                    _handleSignOut();
+                    Get.offAll(() => LoginPage());
                   },
                   child: Text('h'),
                 ),

@@ -5,6 +5,7 @@ import 'package:frontend/page/auth/loginpage.dart';
 import 'package:frontend/page/response/mobileScreenLayout.dart';
 import 'package:frontend/page/response/responsiveLayoutScreen.dart';
 import 'package:frontend/page/response/webScreenLayout.dart';
+import 'package:get/get.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart ' as http;
@@ -178,11 +179,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: LoginPage());
+            primarySwatch: Colors.blue,
+            useMaterial3: true,
+            scaffoldBackgroundColor: const Color.fromRGBO(43, 41, 48, 1),
+            drawerTheme: const DrawerThemeData(
+                backgroundColor: Color.fromRGBO(29, 27, 32, 1)),
+            textTheme: const TextTheme(
+                bodyMedium:
+                    TextStyle(color: Color.fromRGBO(202, 196, 208, 1)))),
+        home: const ResponsiveLayout(
+          mobileScreenLayout: MobileScreenLayout(),
+          webScreenLayout: WebScreenLayout(),
+        ));
   }
 }
