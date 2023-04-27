@@ -6,12 +6,12 @@ const maria = require('../maria.js');
  * 상품조회
  */
 router.get("/", (req, res) => {
-  if(req.body.bucket_id){
+  if(req.query.bucket_id){
     maria((conn) => {
       try {
           conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT 20',
           [
-            req.body.bucket_id
+            req.query.bucket_id
           ],
           function(err, rows, fields){
             if(err){ res.status(422).send(); }

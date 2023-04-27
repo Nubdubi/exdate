@@ -6,12 +6,12 @@ const maria = require('../maria.js');
  * 버킷 조회
  */
 router.get("/", (req, res) => {
-  if(req.body.user_id){
+  if(req.query.user_id){
     maria((conn) => {
       try {
           conn.query('SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT 20',
           [
-            req.body.user_id
+            req.query.user_id
           ],
           function(err, rows, fields){
             if(err){ res.status(422).send(); }
