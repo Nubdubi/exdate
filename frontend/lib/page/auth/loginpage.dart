@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:frontend/page/response/mobileScreenLayout.dart';
 import 'package:frontend/page/response/responsiveLayoutScreen.dart';
 import 'package:frontend/page/response/webScreenLayout.dart';
 import 'package:frontend/services/authService.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart ' as http;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -22,12 +21,28 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildLoginButton() {
     return Center(
-      child: ElevatedButton(
-          onPressed: () {
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.network(
+            'https://csemsyfvlkikwoggzrze.supabase.co/storage/v1/object/public/public/barcode.jpg'),
+        SizedBox(
+          height: 10,
+        ),
+        InkWell(
+          onTap: () {
             controller.login();
           },
-          child: Text('login')),
-    );
+          child: SizedBox(
+            width: 200,
+            child: Image.asset(
+              'googlebutton.png',
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 
   @override

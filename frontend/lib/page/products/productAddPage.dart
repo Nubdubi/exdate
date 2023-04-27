@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/services/productService.dart';
 import 'package:get/get.dart';
-import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+// import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
 
 final _formkey = GlobalKey<FormState>();
@@ -86,19 +86,19 @@ class _ProductAddPageState extends State<ProductAddPage> {
               Text('Barcode capture'),
               InkWell(
                 onTap: () async {
-                  var res = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SimpleBarcodeScannerPage(),
-                      ));
-                  setState(() {
-                    if (res is String) {
-                      getBarcode(res);
-                      barcodeinput.text = res;
+                  // var res = await Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const SimpleBarcodeScannerPage(),
+                  //     ));
+                  // setState(() {
+                  //   if (res is String) {
+                  //     getBarcode(res);
+                  //     barcodeinput.text = res;
 
-                      getBarcode(barcodeinput.text);
-                    }
-                  });
+                  //     getBarcode(barcodeinput.text);
+                  //   }
+                  // });
                 },
                 child: Icon(
                   Icons.camera_alt_rounded,

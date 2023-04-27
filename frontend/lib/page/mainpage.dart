@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
           future: fetch(),
           builder: (context, AsyncSnapshot snapshot) {
             print(snapshot.data.toString());
-            if (!snapshot.hasData) return CircularProgressIndicator();
+            if (!snapshot.hasData) return const CircularProgressIndicator();
             return SingleChildScrollView(
               child: Column(children: [
                 ListView.builder(
