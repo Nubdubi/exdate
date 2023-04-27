@@ -23,6 +23,4 @@ F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/flutt
 F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf
 F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf
 F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/simple_barcode_scanner/assets/barcode.html
-F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/packages/simple_barcode_scanner/assets/html5-qrcode.min.js
 F:/exdate/frontend/build/windows/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

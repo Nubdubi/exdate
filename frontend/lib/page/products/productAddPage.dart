@@ -84,40 +84,39 @@ class _ProductAddPageState extends State<ProductAddPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Barcode capture'),
-              InkWell(
-                onTap: () async {
-                  // var res = await Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const SimpleBarcodeScannerPage(),
-                  //     ));
-                  // setState(() {
-                  //   if (res is String) {
-                  //     getBarcode(res);
-                  //     barcodeinput.text = res;
 
-                  //     getBarcode(barcodeinput.text);
-                  //   }
-                  // });
-                },
-                child: Icon(
-                  Icons.camera_alt_rounded,
-                  size: 40,
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   controller: barcodeinput,
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                      labelText: 'Barcode', border: OutlineInputBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'widget.validator';
-                    }
-                    return null;
-                  },
+                      suffixIcon: InkWell(
+                        onTap: () async {
+                          // var res = await Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const SimpleBarcodeScannerPage(),
+                          //     ));
+                          // setState(() {
+                          //   if (res is String) {
+                          //     getBarcode(res);
+                          //     barcodeinput.text = res;
+
+                          //     getBarcode(barcodeinput.text);
+                          //   }
+                          // });
+                        },
+                        child: Icon(
+                          Icons.camera_alt_rounded,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      labelText: 'Barcode',
+                      border: OutlineInputBorder(),
+                      labelStyle: TextStyle(color: Colors.white)),
                   onFieldSubmitted: (value) {
                     getBarcode(value);
                   },
@@ -168,18 +167,25 @@ class _ProductAddPageState extends State<ProductAddPage> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    prodcutController.addproduct(1, titleinput.text,
-                        countinput.text, exdateinput.text, barcodeinput.text);
-                    barcodeinput.clear();
-                    titleinput.clear();
-                    exdateinput.clear();
-                    titleinput.clear();
-                    countinput.clear();
-                    Get.snackbar(
-                      'productadd success',
-                      '등록완료',
-                      backgroundColor: Colors.white,
-                    );
+                    if (_formkey.currentState == null) {
+                      prodcutController.addproduct(1, titleinput.text,
+                          countinput.text, exdateinput.text, barcodeinput.text);
+                      barcodeinput.clear();
+                      titleinput.clear();
+                      exdateinput.clear();
+                      titleinput.clear();
+                      countinput.clear();
+                      Get.snackbar(
+                        'productadd success',
+                        '등록완료',
+                        backgroundColor: Colors.white,
+                      );
+                    }
+                    if (_formkey.currentState!.validate()) {
+                      print('에러가 없습니다.');
+                    } else {
+                      print('에러!!!!!!');
+                    }
                   },
                   child: Text('상품등록')),
             ],
@@ -215,8 +221,11 @@ class _ProductInputState extends State<ProductInput> {
       child: TextFormField(
         keyboardType: widget.keytype,
         controller: widget.controller,
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            labelText: widget.text, border: OutlineInputBorder()),
+            labelText: widget.text,
+            border: OutlineInputBorder(),
+            labelStyle: TextStyle(color: Colors.white)),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return widget.validator;
@@ -248,6 +257,7 @@ class InputSection extends StatelessWidget {
           width: 300,
           child: TextFormField(
             controller: controller,
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ],
