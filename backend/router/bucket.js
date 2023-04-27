@@ -3,6 +3,45 @@ const router = express.Router();
 const maria = require('../maria.js');
 
 /**
+ * 버킷조회 총 데이터 개수 조회
+ */
+router.get("/first", (req, res) => {
+  if(req.query.user_id){
+    maria(async (conn) => {
+      try {
+          var result_arr = [];
+          await conn.beginTransaction();
+
+          var sql1 = 'SELECT count(*) as cnt FROM bucket WHERE user_id = ? AND delete_flag = 0;';
+          var sql2 = 'SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT 20;';
+          
+          conn.query(sql1, [req.query.user_id], function(error, results1, fields1) {
+            result_arr.push(results1);
+            console.log(results1);
+          });
+          
+          conn.query(sql2, [req.query.user_id], function(error, results2, fields2) {
+            result_arr.push(results2);
+            console.log(results2);
+          });
+          
+          await conn.commit();
+          console.log(result_arr);
+
+          res.send("test");
+      } catch (error) {
+        console.log(error);
+        res.status(503).send(error);
+      } finally{
+        conn.release();
+      }
+    });  
+  }else{
+    res.status(400).send();
+  }
+});
+
+/**
  * 버킷 조회
  */
 router.get("/", (req, res) => {

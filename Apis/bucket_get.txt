@@ -3,7 +3,7 @@ bucket 조회
 request
   필수
     user_id
-    
+    page : 페이지, 없으면 1
 
 response
   return data
