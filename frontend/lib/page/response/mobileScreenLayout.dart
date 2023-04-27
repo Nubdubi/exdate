@@ -2,8 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/page/products/productAddPage.dart';
 
 import 'package:frontend/page/response/navigationitems.dart';
+import 'package:get/get.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -52,7 +54,9 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
             height: 70,
             color: const Color.fromARGB(255, 33, 31, 38),
             child: InkWell(
-              onTap: () => print('tap on close'),
+              onTap: () {
+                Get.to(() => ProductAddPage());
+              },
               child: Padding(
                 padding: EdgeInsets.only(top: 8.0),
                 child: Column(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:frontend/page/calendar/calendarPage.dart';
 import 'package:frontend/page/expage/exdata.dart';
 import 'package:frontend/page/expage/exsearch.dart';
+import 'package:frontend/page/profile/profilePage.dart';
+import 'package:frontend/services/productService.dart';
 import 'package:get/get.dart';
 
 class ExDate extends StatefulWidget {
@@ -13,7 +16,7 @@ class ExDate extends StatefulWidget {
 
 class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-
+  ProdcutController _productService = ProdcutController();
   @override
   void initState() {
     super.initState();
@@ -51,21 +54,27 @@ class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
               Column(
                 children: [
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      _productService.readdata(1);
+                    },
                     title: Text(
                       '● 버킷',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => CalendarPage());
+                    },
                     title: Text(
                       '● 캘린더',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => ProfilePage());
+                    },
                     title: Text(
                       '● 환경설정',
                       style: TextStyle(color: Colors.white),
@@ -101,7 +110,6 @@ class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
                       child: TextFormField(
                         initialValue: result,
                         decoration: InputDecoration(
-                            hintText: 'hint text',
                             fillColor: Color.fromRGBO(43, 41, 48, 1)),
                         style: TextStyle(color: Colors.white),
                       ),
