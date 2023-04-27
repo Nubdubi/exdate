@@ -132,7 +132,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
                 text: 'Exdate',
                 validator: 'Enter Exdate',
                 controller: exdateinput,
-                keytype: TextInputType.phone,
+                keytype: TextInputType.datetime,
               ),
               ProductInput(
                 text: 'count',
