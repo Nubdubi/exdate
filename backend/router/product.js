@@ -5,18 +5,74 @@ const maria = require('../maria.js');
 /**
  * 상품조회
  */
+router.get("/first", (req, res) => {
+  if(req.query.bucket_id){
+    maria(async (conn) => {
+      try {
+        const results = {
+          limit: parseInt(req.query.limit) || 10,
+          page: 1,
+        };
+        
+        await conn.beginTransaction();
+
+        var sql1 = 'SELECT count(*) as cnt FROM product WHERE bucket_id = ? AND delete_flag = 0';
+        await conn.query(sql1, [req.query.bucket_id], function(err, rs, fields){
+          if(err){ res.status(422).send(); }
+          else{ results.cnt = rs[0].cnt; }
+        });
+
+        await conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT ?',
+        [
+          req.query.bucket_id,
+          results.limit,
+        ],
+        function(err, rs, fields){
+          if(err){ res.status(422).send(); }
+          else{ 
+            results.list = rs;
+            res.status(200).send(results);
+          }
+        });
+
+        await conn.commit();
+
+      } catch (error) {
+        res.status(503).send(error);
+      } finally{
+        conn.release();
+      }
+    });
+  }else{
+    res.status(400).send();
+  }
+});
+
+/**
+ * 상품조회
+ */
 router.get("/", (req, res) => {
   if(req.query.bucket_id){
     maria((conn) => {
       try {
-          conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT 20',
-          [
-            req.query.bucket_id
-          ],
-          function(err, rows, fields){
-            if(err){ res.status(422).send(); }
-            else{ res.status(200).send(rows); }
-          });
+        const results = {
+          limit: parseInt(req.query.limit) || 10,
+          page: parseInt(req.query.page) || 1,
+        };
+
+        conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT ? OFFSET ?',
+        [
+          req.query.bucket_id,
+          results.limit,
+          (results.page-1)*results.limit
+        ],
+        function(err, rs, fields){
+          if(err){ res.status(422).send(); }
+          else{ 
+            results.list = rs;
+            res.status(200).send(results);
+          }
+        });
       } catch (error) {
         res.status(503).send(error);
       } finally{

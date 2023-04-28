@@ -3,17 +3,24 @@ product 조회
 request
   필수
     bucket_id
-    
+  
+  선택
+    limit : 가져올 갯수 단위 || 10
+    page : 조회할 페이지 || 1
 
 response
-  return data
-    product_id
-    name
-    bar_cd
-    amount : 상품 수량
-    expiration_date : 유통기한
-    create_date
-    update_date
+  return data {
+    page : 조회한 페이지
+    list : 데이터들 {
+      product_id
+      name
+      bar_cd
+      amount : 상품 수량
+      expiration_date : 유통기한
+      create_date
+      update_date
+    }
+  }
     
   status
     200 : 성공

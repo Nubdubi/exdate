@@ -14,6 +14,7 @@ function getConnection(callback) {
     if (err) {
       throw err;
     }
+
     callback(conn);
   });
 }

@@ -9,28 +9,35 @@ router.get("/first", (req, res) => {
   if(req.query.user_id){
     maria(async (conn) => {
       try {
-          var result_arr = [];
+          const results = {
+            limit: parseInt(req.query.limit) || 10,
+            page: 1,
+          };
+
           await conn.beginTransaction();
 
-          var sql1 = 'SELECT count(*) as cnt FROM bucket WHERE user_id = ? AND delete_flag = 0;';
-          var sql2 = 'SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT 20;';
-          
-          conn.query(sql1, [req.query.user_id], function(error, results1, fields1) {
-            result_arr.push(results1);
-            console.log(results1);
+          var sql1 = 'SELECT count(*) as cnt FROM bucket WHERE user_id = ? AND delete_flag = 0';
+          await conn.query(sql1, [req.query.user_id], function(err, rs, fields){
+            if(err){ res.status(422).send(); }
+            else{ results.cnt = rs[0].cnt; }
           });
-          
-          conn.query(sql2, [req.query.user_id], function(error, results2, fields2) {
-            result_arr.push(results2);
-            console.log(results2);
+
+          await conn.query('SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT ?', 
+            [
+              req.query.user_id, 
+              results.limit
+            ], 
+            function(err, rs, fields){
+              if(err){ res.status(422).send(); }
+              else{ 
+                results.list = rs;
+                res.status(200).send(results);
+              }
           });
           
           await conn.commit();
-          console.log(result_arr);
 
-          res.send("test");
       } catch (error) {
-        console.log(error);
         res.status(503).send(error);
       } finally{
         conn.release();
@@ -48,13 +55,23 @@ router.get("/", (req, res) => {
   if(req.query.user_id){
     maria((conn) => {
       try {
-          conn.query('SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT 20',
+          const results = {
+            limit: parseInt(req.query.limit) || 10,
+            page: parseInt(req.query.page) || 1,
+          };
+          
+          conn.query('SELECT bucket_id, name, create_date, update_date FROM bucket WHERE user_id = ? AND delete_flag = 0 ORDER BY bucket_id DESC LIMIT ? OFFSET ?;',
           [
-            req.query.user_id
+            req.query.user_id,
+            results.limit,
+            (results.page-1)*results.limit
           ],
-          function(err, rows, fields){
+          function(err, rs, fields){
             if(err){ res.status(422).send(); }
-            else{ res.status(200).send(rows); }
+            else{
+              results.list = rs;
+              res.status(200).send(results);
+            }
           });
       } catch (error) {
         res.status(503).send(error);

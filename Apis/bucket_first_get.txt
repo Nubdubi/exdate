@@ -1,21 +1,21 @@
 bucket/first 조회
 
 request
-  필수
-    user_id
-  
-  선택
-    limit : 가져올 갯수 단위 || 10
-    page : 조회할 페이지 || 1
+    필수
+        user_id
+
+    선택
+      limit : 가져올 갯수 단위 || 10
 
 response
   return data {
     page : 조회한 페이지
+    cnt : 데이터 총 갯수 (이 값 받아서 페이징처리)
     list : 데이터들 {
-      bucket_id
-      name
-      create_date : 생성날짜
-      update_date : 마지막 수정날짜
+        bucket_id
+        name
+        create_date : 생성날짜
+        update_date : 마지막 수정날짜
     }
   }
 

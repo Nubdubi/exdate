@@ -1,28 +1,29 @@
-bucket/first 조회
+product/first 조회
 
 request
   필수
-    user_id
+    bucket_id
   
   선택
     limit : 가져올 갯수 단위 || 10
-    page : 조회할 페이지 || 1
 
 response
   return data {
     page : 조회한 페이지
+    cnt : 데이터 총 갯수 (이 값 받아서 페이징처리)
     list : 데이터들 {
-      bucket_id
+      product_id
       name
-      create_date : 생성날짜
-      update_date : 마지막 수정날짜
+      bar_cd
+      amount : 상품 수량
+      expiration_date : 유통기한
+      create_date
+      update_date
     }
   }
-
     
   status
     200 : 성공
     400 : 클라이언트 api정보 오류 (필요 request정보 없음)
     422 : 쿼리문 실패 (request 문제 이거나 , query문 잘못됨)
     503 : 과부하 상태 서버 오류 (DB 연결 실패)
-  
