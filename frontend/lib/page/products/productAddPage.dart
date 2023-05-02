@@ -167,7 +167,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    if (_formkey.currentState == null) {
+                    if (_formkey.currentState!.validate()) {
+                      print('등록완료');
                       prodcutController.addproduct(1, titleinput.text,
                           countinput.text, exdateinput.text, barcodeinput.text);
                       barcodeinput.clear();
@@ -180,9 +181,6 @@ class _ProductAddPageState extends State<ProductAddPage> {
                         '등록완료',
                         backgroundColor: Colors.white,
                       );
-                    }
-                    if (_formkey.currentState!.validate()) {
-                      print('에러가 없습니다.');
                     } else {
                       print('에러!!!!!!');
                     }
