@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/services/productService.dart';
@@ -6,8 +7,10 @@ import 'package:get/get.dart';
 // import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:date_count_down/date_count_down.dart';
 
 final _formkey = GlobalKey<FormState>();
+List<String> dropdownList = ['1', '2', '3'];
 
 class ProductAddPage extends StatefulWidget {
   ProductAddPage({Key? key}) : super(key: key);
@@ -22,17 +25,21 @@ class _ProductAddPageState extends State<ProductAddPage> {
   TextEditingController titleinput = TextEditingController();
   TextEditingController exdateinput = TextEditingController();
   TextEditingController countinput = TextEditingController();
+  TextEditingController companyinput = TextEditingController();
 
   TextEditingController placeinput = TextEditingController();
+  TextEditingController memoinput = TextEditingController();
+
   ProdcutController prodcutController = ProdcutController();
+
+  TextEditingController leftimecontroller = TextEditingController();
+  String selectedDropdown = dropdownList.first;
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
     Map data;
     String productName = '';
-    List<String> dropdownList = ['1', '2', '3'];
-    String selectedDropdown = '1';
-    bool isSwitched = false;
 
     getBarcode(barcode) async {
       http.Response response = await http.get(Uri.parse(
@@ -69,14 +76,26 @@ class _ProductAddPageState extends State<ProductAddPage> {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       };
-      http.Response response = await http.post(
-          Uri.parse('http://localhost:9000/bucket'),
-          headers: requestHeaders,
-          body: jsonEncode(data));
-      if (response.statusCode == 200) {
-        print(response);
+      if (kDebugMode) {
+        http.Response response = await http.post(
+            Uri.parse('http://localhost:9000/bucket'),
+            headers: requestHeaders,
+            body: jsonEncode(data));
+        if (response.statusCode == 200) {
+          print(response);
+        }
+      } else {
+        http.Response response = await http.post(
+            Uri.parse('http://castpro.site:9000/bucket'),
+            headers: requestHeaders,
+            body: jsonEncode(data));
+        if (response.statusCode == 200) {
+          print(response);
+        }
       }
     }
+
+    var _toDay = DateTime.now();
 
     return Scaffold(
       appBar: AppBar(),
@@ -177,22 +196,49 @@ class _ProductAddPageState extends State<ProductAddPage> {
                 ProductInput(
                   text: '제조사',
                   validator: 'Enter Product Name',
-                  controller: titleinput,
+                  controller: companyinput,
                   keytype: TextInputType.text,
                 ),
-                ProductInput(
-                  text: '유통기한',
-                  validator: 'Enter Exdate',
-                  controller: exdateinput,
-                  keytype: TextInputType.datetime,
+
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: TextFormField(
+                    controller: exdateinput,
+                    keyboardType: TextInputType.datetime,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                        labelText: '유통기한',
+                        disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: Color.fromARGB(255, 68, 68, 68))),
+                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(color: Colors.white)),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return '유통기한을 입력해주세요';
+                      }
+                      return null;
+                    },
+                    onEditingComplete: () {
+                      if (exdateinput.text.isNotEmpty) {
+                        leftimecontroller
+                            .text = int.parse(DateTime.parse(exdateinput.text)
+                                .difference(DateTime.parse(_toDay.toString()))
+                                .inDays
+                                .toString())
+                            .toString();
+                        setState(() {});
+                      }
+                    },
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     enabled: false,
-                    initialValue: DateFormat('yyyy.MM.dd')
-                        .format(DateTime.now())
-                        .toString(),
+                    initialValue:
+                        DateFormat('yyyy-MM-dd').format(_toDay).toString(),
                     keyboardType: TextInputType.number,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
@@ -211,27 +257,20 @@ class _ProductAddPageState extends State<ProductAddPage> {
                     },
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     enabled: false,
-                    initialValue: '3일',
-                    keyboardType: TextInputType.number,
                     style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                         disabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 1,
                                 color: Color.fromARGB(255, 68, 68, 68))),
-                        label: Text('잔여일'),
+                        label: Text('${leftimecontroller.text.toString()}일'),
                         border: OutlineInputBorder(),
                         labelStyle: TextStyle(color: Colors.white)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Enter count';
-                      }
-                      return null;
-                    },
                   ),
                 ),
 
@@ -258,8 +297,9 @@ class _ProductAddPageState extends State<ProductAddPage> {
                           child: Container(),
                         ),
                         onChanged: (String? newValue) {
-                          selectedDropdown = newValue!;
-                          setState(() {});
+                          setState(() {
+                            selectedDropdown = newValue!;
+                          });
                         },
                         items: dropdownList.map((String item) {
                           return DropdownMenuItem<String>(
@@ -328,7 +368,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
                     maxLines: 5,
                     maxLength: 100,
                     keyboardType: TextInputType.number,
-                    controller: countinput,
+                    controller: memoinput,
                     style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
                         label: Text('메모'),
