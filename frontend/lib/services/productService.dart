@@ -69,7 +69,11 @@ class ProdcutController {
       "bar_cd": barcode,
     };
     Map<String, String> requestHeaders = {
+      "Access-Control-Allow-Credentials": "*",
       "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+      "Access-Control-Allow-Headers":
+          "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };

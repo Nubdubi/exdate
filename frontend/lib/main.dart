@@ -190,9 +190,22 @@ class _MyAppState extends State<MyApp> {
             textTheme: const TextTheme(
                 bodyMedium:
                     TextStyle(color: Color.fromRGBO(202, 196, 208, 1)))),
-        home: const ResponsiveLayout(
-          mobileScreenLayout: MobileScreenLayout(),
-          webScreenLayout: WebScreenLayout(),
-        ));
+        home: Wrapper());
+  }
+}
+
+class Wrapper extends StatefulWidget {
+  Wrapper({Key? key}) : super(key: key);
+
+  @override
+  State<Wrapper> createState() => _WrapperState();
+}
+
+class _WrapperState extends State<Wrapper> {
+  @override
+  Widget build(BuildContext context) {
+    return const ResponsiveLayout(
+        mobileScreenLayout: MobileScreenLayout(),
+        webScreenLayout: WebScreenLayout());
   }
 }

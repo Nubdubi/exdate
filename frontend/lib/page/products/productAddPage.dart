@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/main.dart';
 import 'package:frontend/page/expage/exdata.dart';
 import 'package:frontend/page/mainpage.dart';
 import 'package:frontend/services/productService.dart';
@@ -448,7 +449,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
                                         child: Text('추가등록')),
                                     ElevatedButton(
                                         onPressed: () {
-                                          Get.replace(ExDate());
+                                          Get.offAll(() => Wrapper());
                                         },
                                         child: Text('메인화면')),
                                   ],
