@@ -86,7 +86,7 @@ class ProdcutController {
       }
     } else {
       http.Response response = await http.post(
-          Uri.parse('http:// castpro.site:9000/product'),
+          Uri.parse('https://castpro.site:9000/product'),
           headers: requestHeaders,
           body: jsonEncode(data));
       if (response.statusCode == 200) {

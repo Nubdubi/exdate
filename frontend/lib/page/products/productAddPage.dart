@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/page/expage/exdata.dart';
+import 'package:frontend/page/mainpage.dart';
 import 'package:frontend/services/productService.dart';
 import 'package:get/get.dart';
 // import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
@@ -432,6 +434,25 @@ class _ProductAddPageState extends State<ProductAddPage> {
                               '등록완료',
                               backgroundColor: Colors.white,
                             );
+                            Get.defaultDialog(
+                                title: '등록완료 되었습니다.',
+                                content: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text('추가등록')),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Get.replace(ExDate());
+                                        },
+                                        child: Text('메인화면')),
+                                  ],
+                                ));
                           } else {
                             print('에러!!!!!!');
                           }
