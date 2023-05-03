@@ -87036,7 +87036,7 @@ while(true)switch(s){case 0:p=t.N
 o=A.aC(["bucket_id",a,"name",b,"date",q.a,"amount",c,"expiration_date",d,"bar_cd",e],p,t.z)
 n=A.aC(["Access-Control-Allow-Origin","*","Content-Type","application/json","Accept","application/json"],p,p)
 s=2
-return A.T(A.aUg(A.f5("https://castpro.site:9000/product",0,null),B.bB.Uj(o,null),n),$async$z9)
+return A.T(A.aUg(A.f5("http://castpro.site:9000/product",0,null),B.bB.Uj(o,null),n),$async$z9)
 case 2:m=g
 if(m.b===200)A.hb(m)
 else A.hb(A.xk(J.ay(A.xd(m.e).c.a,"charset")).d1(0,m.w))
