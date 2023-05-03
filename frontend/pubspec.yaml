@@ -43,6 +43,7 @@ dependencies:
   intl: ^0.18.0
   # simple_barcode_scanner: ^0.0.8
   table_calendar: ^3.0.9
+  date_count_down: ^2.1.0
 
 dev_dependencies:
   build_runner: ^2.3.3

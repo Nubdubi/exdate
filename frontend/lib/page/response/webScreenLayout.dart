@@ -39,7 +39,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
     }
 
     return Center(
-      child: MobileScreenLayout(),
+      child: Container(width: 300, child: MobileScreenLayout()),
     );
 
     // return Scaffold(

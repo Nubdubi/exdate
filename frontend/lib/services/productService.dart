@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -68,18 +69,35 @@ class ProdcutController {
       "bar_cd": barcode,
     };
     Map<String, String> requestHeaders = {
+      "Access-Control-Allow-Credentials": "*",
       "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+      "Access-Control-Allow-Headers":
+          "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-    http.Response response = await http.post(
-        Uri.parse('http://localhost:9000/product'),
-        headers: requestHeaders,
-        body: jsonEncode(data));
-    if (response.statusCode == 200) {
-      print(response);
+
+    if (kDebugMode) {
+      http.Response response = await http.post(
+          Uri.parse('http://localhost:9000/product'),
+          headers: requestHeaders,
+          body: jsonEncode(data));
+      if (response.statusCode == 200) {
+        print(response);
+      } else {
+        print(response.body);
+      }
     } else {
-      print(response.body);
+      http.Response response = await http.post(
+          Uri.parse('http://castpro.site:9000/product'),
+          headers: requestHeaders,
+          body: jsonEncode(data));
+      if (response.statusCode == 200) {
+        print(response);
+      } else {
+        print(response.body);
+      }
     }
   }
 
