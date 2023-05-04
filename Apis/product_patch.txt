@@ -2,12 +2,16 @@ product 수정
 
 request
     필수
-        상품ID : product_id
-        날짜 : update_date
+        product_id : 상품ID
+        update_date : 날짜
 
     선택
-        상품명 : name
-        바코드 : bar_cd
+        name : 상품명
+        bar_cd : 바코드
+        consump_yn : 소비여부 - 0/1
+        company : 제조사
+        memo : 메모
+
 
     이외에 바꾸고 싶은 product 컬럼명 중 하나 넣으면됨
     다만 수정 불가 컬럼이 있음 {product_id, bucket_id}

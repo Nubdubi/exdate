@@ -2,14 +2,19 @@ product 등록
 
 request
   필수
-    버킷ID : bucket_id
-    상품명 : name
-    날짜 : date
-    상품갯수 : amount
-    유통기한 : expiration_date
-    바코드 : bar_cd (없으면 빈값 넣으면 됨)
+    bucket_id : 버킷ID
+    name : 상품명
+    date : 날짜
+    amount : 상품갯수
+    expiration_date : 유통기한
   
+  선택
+    bar_cd : 바코드
+    company : 회사
+    memo : 메모
+    consump_yn : 소비여부 / 기본값 0
   
+
 response 
   status
     200 : 성공

@@ -60,7 +60,7 @@ router.get("/", (req, res) => {
           page: parseInt(req.query.page) || 1,
         };
 
-        conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT ? OFFSET ?',
+        conn.query('SELECT product_id, name, bar_cd, amount, expiration_date, company, memo, consump_yn, create_date, update_date FROM product WHERE bucket_id = ? AND delete_flag = 0 ORDER BY product_id DESC LIMIT ? OFFSET ?',
         [
           req.query.bucket_id,
           results.limit,
@@ -95,19 +95,21 @@ router.post("/", (req, res) => {
     && req.body.date 
     && req.body.amount
     && req.body.expiration_date
-    && req.body.bar_cd != undefined
   ){
     maria((conn) => {
       try {
-          conn.query('INSERT INTO product (bucket_id, name, bar_cd, create_date, update_date, amount, expiration_date) VALUES(?, ?, ?, ?, ?, ?, ?)',
+          conn.query('INSERT INTO product (bucket_id, name, bar_cd, create_date, update_date, amount, expiration_date, company, memo, consump_yn) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
           [
             req.body.bucket_id,
             req.body.name,
-            req.body.bar_cd,
+            req.body.bar_cd || null,
             req.body.date,
             req.body.date,
             req.body.amount,
-            req.body.expiration_date
+            req.body.expiration_date,
+            req.body.company || null,
+            req.body.memo || null,
+            req.body.consump_yn || 0
           ],
           function(err, rows, fields){
             if(err){ res.status(422).send(); }
