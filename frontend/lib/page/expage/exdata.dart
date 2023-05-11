@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:frontend/page/bucket/bucketPage.dart';
 import 'package:frontend/page/calendar/calendarPage.dart';
 import 'package:frontend/page/expage/exdata.dart';
 import 'package:frontend/page/expage/exsearch.dart';
@@ -55,7 +56,7 @@ class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
                 children: [
                   ListTile(
                     onTap: () {
-                      _productService.readdata(1);
+                      Get.to(() => BucketPage());
                     },
                     title: Text(
                       '● 버킷',

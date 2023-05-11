@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/main.dart';
+import 'package:frontend/model/mainviewmodel.dart';
 import 'package:frontend/page/expage/exdata.dart';
 import 'package:frontend/page/mainpage.dart';
+import 'package:frontend/repository/fileRepository.dart';
 import 'package:frontend/services/productService.dart';
 import 'package:get/get.dart';
 // import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
@@ -36,8 +40,11 @@ class _ProductAddPageState extends State<ProductAddPage> {
   ProdcutController prodcutController = ProdcutController();
 
   TextEditingController leftimecontroller = TextEditingController();
+  ImageHelper imageHelper = ImageHelper();
   String selectedDropdown = dropdownList.first;
   bool isSwitched = false;
+  final viewModel = MainViewmodel();
+  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +107,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
 
     var _toDay = DateTime.now();
 
+    //upload
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -120,35 +129,60 @@ class _ProductAddPageState extends State<ProductAddPage> {
                         height: 5,
                       ),
                       GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            final files = await imageHelper.pickImage();
+                            if (files.isNotEmpty) {
+                              final croppedfile = await imageHelper
+                                  .crop(context, file: files.first);
+                              if (croppedfile != null) {
+                                setState(() {
+                                  _image = File(croppedfile.path);
+                                });
+                              }
+                            }
+                            // setState(() {
+                            //   viewModel.isLoading = true;
+                            // });
+                            // await Future.delayed(Duration(seconds: 2));
+                            // final bytes = await rootBundle.load('bb.jpg');
+                            // await viewModel.uploadImage(
+                            //     bytes.buffer.asUint8List(), 'test');
+
+                            // setState(() {
+                            //   viewModel.isLoading = false;
+                            // });
+                          },
                           child: Container(
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(54, 52, 59, 1),
-                              border: Border.all(
-                                width: 1,
+                              decoration: BoxDecoration(
                                 color: Color.fromRGBO(54, 52, 59, 1),
-                              ),
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromARGB(255, 0, 0, 0)
-                                      .withOpacity(0.5),
-                                  spreadRadius: 0.3,
-                                  blurRadius: 4,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
+                                border: Border.all(
+                                  width: 1,
+                                  color: Color.fromRGBO(54, 52, 59, 1),
                                 ),
-                              ],
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Icon(
-                                Icons.camera_alt_outlined,
-                                size: 20,
-                                color: Color.fromRGBO(208, 188, 255, 1),
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color.fromARGB(255, 0, 0, 0)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 0.3,
+                                    blurRadius: 4,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
                               ),
-                            ),
-                          )),
+                              child: _image != null
+                                  ? CircleAvatar(
+                                      backgroundImage: FileImage(_image!),
+                                    )
+                                  : const Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Icon(
+                                        Icons.camera_alt_outlined,
+                                        size: 20,
+                                        color: Color.fromRGBO(208, 188, 255, 1),
+                                      ),
+                                    ))),
                     ],
                   ),
                 ),
