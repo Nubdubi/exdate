@@ -1,0 +1,25 @@
+request
+  필수
+    bar_cd : 바코드번호 || ""
+  
+response
+  return data {
+    PRDLST_REPORT_NO : 품목보고(신고)번호
+    PRMS_DT : 보고(신고일)
+    END_DT : 생산중단일
+    PRDLST_NM : 제품명
+    POG_DAYCNT : 유통/소비기한
+    PRDLST_DCNM : 식품 유형
+    BSSH_NM : 제조사명
+    INDUTY_NM : 업종
+    SITE_ADDR : 주소
+    CLSBIZ_DT : 폐업일자
+    BAR_CD : 유통바코드
+  }
+    
+  status
+    200 : 성공
+    204 : 콘텐츠 없음 (바코드에 맞는 데이터가 없음)
+    400 : 클라이언트 api정보 오류 (필요 request정보 없음)
+    422 : 쿼리문 실패 (request 문제 이거나 , query문 잘못됨)
+    503 : 과부하 상태 서버 오류 (DB 연결 실패)
