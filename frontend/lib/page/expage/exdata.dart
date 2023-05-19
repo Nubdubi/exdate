@@ -3,10 +3,12 @@ import 'package:flutter/rendering.dart';
 import 'package:frontend/page/bucket/bucketPage.dart';
 import 'package:frontend/page/calendar/calendarPage.dart';
 import 'package:frontend/page/expage/exdata.dart';
+import 'package:frontend/page/expage/exdateWidgetAllproduct.dart';
 import 'package:frontend/page/expage/exsearch.dart';
 import 'package:frontend/page/profile/profilePage.dart';
 import 'package:frontend/services/productService.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ExDate extends StatefulWidget {
   ExDate({Key? key}) : super(key: key);
@@ -17,13 +19,37 @@ class ExDate extends StatefulWidget {
 
 class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  ProdcutController _productService = ProdcutController();
+  ProductController _productService = ProductController();
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
         duration: const Duration(milliseconds: 200), vsync: this);
   }
+
+  List<Map<dynamic, dynamic>> snapshot = [
+    {
+      "name": "name1",
+      "brand": "brand1",
+      "date": '2020-02-03',
+      "exdate": "2023-03-03",
+      "img": "img",
+    },
+    {
+      "name": "name2",
+      "brand": "brand2",
+      "date": '2020-02-03',
+      "exdate": "2023-03-03",
+      "img": "img",
+    },
+    {
+      "name": "name3",
+      "brand": "brand3",
+      "date": '2020-02-03',
+      "exdate": "2023-03-03",
+      "img": "img",
+    }
+  ];
 
   bool _isChecked = false;
   @override
@@ -209,104 +235,42 @@ class _ExDateState extends State<ExDate> with SingleTickerProviderStateMixin {
               Container(
                   height: MediaQuery.of(context).size.width * 0.9,
                   child: TabBarView(children: [
-                    ListView.builder(
-                      key: const PageStorageKey("LIST_VIEW"),
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            onTap: () {},
-                            leading: const Text(
-                              'image',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            title: const Text(
-                              '농심 신라면',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            subtitle: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '바코드 : 8080800',
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.color),
-                                    ),
-                                    const Row(
-                                      children: [
-                                        Text(
-                                          '2022-01-02 ~',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        Text(
-                                          '2022-02-03',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const Column(
-                                  children: [
-                                    Text(
-                                      'n EA',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      'MM.dd',
-                                      style: TextStyle(color: Colors.white),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Checkbox(
-                                    value: _isChecked,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _isChecked = value!;
-                                      });
-                                    },
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      width: 24,
-                                      height: 10,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                        color: const Color.fromRGBO(
-                                            242, 184, 181, 1),
-                                      ),
-                                      child: const Center(
-                                          child: Text('상태',
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      96, 20, 16, 1),
-                                                  fontSize: 10))),
-                                    ),
-                                  )
-                                ]),
-                          ),
-                        );
-                      },
+                    TabProdcutList(
+                      checked: _isChecked,
+                      name: snapshot[0]['name'],
+                      img: 'img',
+                      barcode: '0000',
+                      date: DateTime.parse('2020-03-01'),
+                      exdate: DateTime.parse('2021-03-01'),
+                      itemlenght: snapshot.length,
                     ),
-                    const Text('a'),
-                    const Text('b'),
-                    const Text('c')
+                    TabProdcutList(
+                      checked: _isChecked,
+                      name: 'name',
+                      img: 'img',
+                      barcode: '0000',
+                      date: DateTime.parse('2020-03-01'),
+                      exdate: DateTime.parse('2021-03-01'),
+                      itemlenght: snapshot.length,
+                    ),
+                    TabProdcutList(
+                      checked: _isChecked,
+                      name: 'name',
+                      img: 'img',
+                      barcode: '0000',
+                      date: DateTime.parse('2020-03-01'),
+                      exdate: DateTime.parse('2021-03-01'),
+                      itemlenght: snapshot.length,
+                    ),
+                    TabProdcutList(
+                      checked: _isChecked,
+                      name: 'name',
+                      img: 'img',
+                      barcode: '0000',
+                      date: DateTime.parse('2020-03-01'),
+                      exdate: DateTime.parse('2021-03-01'),
+                      itemlenght: snapshot.length,
+                    ),
                   ]))
             ],
           ),

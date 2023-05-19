@@ -56,7 +56,7 @@ const DOMAIN = 'localhost:9000';
 
 // }
 
-class ProdcutController {
+class ProductController {
   var date = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   addproduct(bucketid, name, count, exdate, barcode) async {

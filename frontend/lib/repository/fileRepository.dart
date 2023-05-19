@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/util/fileapi.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 
 class FileRepository {
   final _api = FileApi();
@@ -20,6 +19,8 @@ class FileRepository {
     }
   }
 }
+
+class ImagesPicker {}
 
 class ImageHelper {
   ImageHelper({
@@ -50,19 +51,25 @@ class ImageHelper {
     required XFile file,
     CropStyle cropStyle = CropStyle.rectangle,
   }) async {
-    if (kIsWeb) {
-      await _imageCropper.cropImage(
-          sourcePath: file.path,
-          cropStyle: cropStyle,
-          compressQuality: 100,
-          uiSettings: [WebUiSettings(context: context)]);
+    try {
+      if (kIsWeb) {
+        await _imageCropper.cropImage(
+            sourcePath: file.path,
+            cropStyle: cropStyle,
+            compressQuality: 100,
+            uiSettings: [WebUiSettings(context: context)]);
+      }
+    } catch (e) {
+      print(e);
     }
     if (Platform.isAndroid && Platform.isIOS) {
       await _imageCropper.cropImage(
-          sourcePath: file.path,
-          cropStyle: cropStyle,
-          compressQuality: 100,
-          uiSettings: [IOSUiSettings(), AndroidUiSettings()]);
+        sourcePath: file.path,
+        cropStyle: cropStyle,
+      );
+      // compressQuality: 100,
+      // uiSettings: [IOSUiSettings(), AndroidUiSettings()]);
     }
+    return null;
   }
 }

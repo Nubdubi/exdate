@@ -202,8 +202,12 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
+  final GoogleSignInAccount? user = _currentUser;
   @override
   Widget build(BuildContext context) {
+    if (user == null) {
+      return LoginPage();
+    }
     return const ResponsiveLayout(
         mobileScreenLayout: MobileScreenLayout(),
         webScreenLayout: WebScreenLayout());

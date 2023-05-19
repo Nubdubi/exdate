@@ -1,5 +1,3 @@
-import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 
@@ -50,5 +48,9 @@ class LoginController extends GetxController {
 
   logout() async {
     googleAccount.value = await _googleSignin.signOut();
+  }
+
+  sessionCheck() async {
+    print(_googleSignin.clientId);
   }
 }

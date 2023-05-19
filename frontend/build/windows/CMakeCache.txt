@@ -15,7 +15,7 @@
 ########################
 
 //Path to a program.
-CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.31.31103/bin/Hostx64/x64/lib.exe
+CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/lib.exe
 
 CMAKE_CONFIGURATION_TYPES:STRING=Debug;Profile;Release
 
@@ -65,7 +65,7 @@ CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=F:/exdate/frontend/build/windows/CMakeFi
 CMAKE_INSTALL_PREFIX:PATH=$<TARGET_FILE_DIR:frontend>
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.31.31103/bin/Hostx64/x64/link.exe
+CMAKE_LINKER:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/link.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -185,9 +185,6 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Path to a program.
-NUGET:FILEPATH=C:/nuget/nuget.exe
-
 //Value Computed by CMake
 frontend_BINARY_DIR:STATIC=F:/exdate/frontend/build/windows
 
@@ -214,18 +211,6 @@ url_launcher_windows_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 url_launcher_windows_SOURCE_DIR:STATIC=F:/exdate/frontend/windows/flutter/ephemeral/.plugin_symlinks/url_launcher_windows/windows
-
-//Dependencies for the target
-url_launcher_windows_plugin_LIB_DEPENDS:STATIC=general;flutter_wrapper_plugin;
-
-//Value Computed by CMake
-webview_windows_BINARY_DIR:STATIC=F:/exdate/frontend/build/windows/plugins/webview_windows
-
-//Value Computed by CMake
-webview_windows_IS_TOP_LEVEL:STATIC=OFF
-
-//Value Computed by CMake
-webview_windows_SOURCE_DIR:STATIC=F:/exdate/frontend/windows/flutter/ephemeral/.plugin_symlinks/webview_windows/windows
 
 //Value Computed by CMake
 window_to_front_BINARY_DIR:STATIC=F:/exdate/frontend/build/windows/plugins/window_to_front

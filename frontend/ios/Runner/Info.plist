@@ -48,6 +48,16 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-<string>App would like to use camera for taking pictures</string>
+	<string>App would like to use camera for taking pictures</string>
+	<key>CFBundleURLTypes</key>
+		<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+					<array>
+					<!-- TODO Replace this value: -->
+					<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+					<string>317921682520-osl28bu3k92j0st1hjm9ehvc8m9n29jl.apps.googleusercontent.com</string>
+					</array>		
+
 </dict>
 </plist>

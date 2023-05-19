@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     print(snapshot.data.toString());
-                    return ListTile(
+                    return const ListTile(
                       leading: Text('상품이미지'),
                       title: Text('상품명'),
                       subtitle: Text('유효일자 - 2030-03-02'),

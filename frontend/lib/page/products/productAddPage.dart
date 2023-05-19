@@ -1,20 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/main.dart';
 import 'package:frontend/model/mainviewmodel.dart';
-import 'package:frontend/page/expage/exdata.dart';
-import 'package:frontend/page/mainpage.dart';
 import 'package:frontend/repository/fileRepository.dart';
 import 'package:frontend/services/productService.dart';
 import 'package:get/get.dart';
 // import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:date_count_down/date_count_down.dart';
 
 final _formkey = GlobalKey<FormState>();
 List<String> dropdownList = ['1', '2', '3'];
@@ -37,14 +34,26 @@ class _ProductAddPageState extends State<ProductAddPage> {
   TextEditingController placeinput = TextEditingController();
   TextEditingController memoinput = TextEditingController();
 
-  ProdcutController prodcutController = ProdcutController();
+  ProductController prodcutController = ProductController();
 
   TextEditingController leftimecontroller = TextEditingController();
   ImageHelper imageHelper = ImageHelper();
+  ImagesPicker imagesPicker = ImagesPicker();
   String selectedDropdown = dropdownList.first;
   bool isSwitched = false;
   final viewModel = MainViewmodel();
   File? _image;
+
+  Future pickImage() async {
+    try {
+      final _image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (_image == null) return;
+      final imageTemporary = File(_image.path);
+      setState(() => this._image = imageTemporary);
+    } on PlatformException catch (e) {
+      print('fail $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,16 +139,18 @@ class _ProductAddPageState extends State<ProductAddPage> {
                       ),
                       GestureDetector(
                           onTap: () async {
-                            final files = await imageHelper.pickImage();
-                            if (files.isNotEmpty) {
-                              final croppedfile = await imageHelper
-                                  .crop(context, file: files.first);
-                              if (croppedfile != null) {
-                                setState(() {
-                                  _image = File(croppedfile.path);
-                                });
-                              }
-                            }
+                            pickImage();
+                            // final files = await imageHelper.pickImage();
+                            // if (files.isNotEmpty) {
+                            //   // ignore: use_build_context_synchronously
+                            //   final croppedfile = await imageHelper
+                            //       .crop(context, file: files.first);
+                            //   if (croppedfile != null) {
+                            //     setState(() {
+                            //       _image = XFile(files.first) as File?;
+                            //     });
+                            //   }
+                            // }
                             // setState(() {
                             //   viewModel.isLoading = true;
                             // });
@@ -172,8 +183,12 @@ class _ProductAddPageState extends State<ProductAddPage> {
                                 ],
                               ),
                               child: _image != null
-                                  ? CircleAvatar(
-                                      backgroundImage: FileImage(_image!),
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.file(_image!,
+                                          width: 160,
+                                          height: 160,
+                                          fit: BoxFit.cover),
                                     )
                                   : const Padding(
                                       padding: EdgeInsets.all(20.0),

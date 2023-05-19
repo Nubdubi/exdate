@@ -25,8 +25,8 @@ class _LoginPageState extends State<LoginPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.network(
-            'https://csemsyfvlkikwoggzrze.supabase.co/storage/v1/object/public/public/barcode.jpg'),
+        // Image.network(
+        //     'https://csemsyfvlkikwoggzrze.supabase.co/storage/v1/object/public/public/barcode.jpg'),
         SizedBox(
           height: 10,
         ),
@@ -34,12 +34,7 @@ class _LoginPageState extends State<LoginPage> {
           onTap: () {
             controller.login();
           },
-          child: SizedBox(
-            width: 200,
-            child: Image.asset(
-              'googlebutton.png',
-            ),
-          ),
+          child: SizedBox(width: 200, child: Text('google login')),
         ),
       ],
     ));
